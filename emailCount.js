@@ -4,7 +4,7 @@ const filePath = "./test.txt";
 const softwire = /[^\s]+@softwire\.com/g;
 const emailReg = /[^\s]+@\w+\.[^\s]+/g;
 const emailReg2 = /[^\s]+(@\w+\.)[^\s]+/g;
-const domainReg = /.*@[^\s]+\.[^\s]+/g;
+const domainReg = /@[^\s]+\.[^\s]+/g;
 
 const readFileToString = (filePath) => fs.readFileSync(filePath, "utf-8");
 
@@ -40,7 +40,7 @@ const createDictOfStringMatches = (text, regex) => {
   const matches = text.match(regex);
   const dict = {};
   matches.forEach((match) => {
-    dict[match] = (dict[match] ?? 0) + 1});
+    dict[match] = (dict[match] || 0) + 1});
   return dict;
 };
 
@@ -62,8 +62,6 @@ const dictOfDomains = createDictOfStringMatches(testString, domainReg);
 // const dictOfDomains = createDictOfGroupedStringMatches(testString, emailReg2);
 
 console.log(dictOfDomains)
-// console.log(dictOfDomains)
-// console.log(dictOfDomains)
 // console.log(pickHighest(dictOfDomains, 10));
 // console.log(pickGreaterThan(dictOfDomains, 63));
 
